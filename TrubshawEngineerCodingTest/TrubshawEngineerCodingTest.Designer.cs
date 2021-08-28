@@ -1,7 +1,7 @@
 ﻿
 namespace TrubshawEngineerCodingTest
 {
-    partial class Form1
+    partial class TrubshawEngineerCodingTest
     {
         /// <summary>
         /// Required designer variable.
@@ -187,7 +187,7 @@ namespace TrubshawEngineerCodingTest
             this.question3Answer.TabIndex = 14;
             this.question3Answer.Text = "Q3ANS";
             // 
-            // Form1
+            // TrubshawEngineerCodingTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -207,8 +207,8 @@ namespace TrubshawEngineerCodingTest
             this.Controls.Add(this.questionText);
             this.Controls.Add(this.questionNo);
             this.Controls.Add(this.nextButton);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "TrubshawEngineerCodingTest";
+            this.Text = "Trubshaw Engineer Coding Test";
             this.ResumeLayout(false);
             this.PerformLayout();
 

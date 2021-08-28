@@ -12,11 +12,10 @@ using System.Windows.Forms;
 
 namespace TrubshawEngineerCodingTest
 {
-    public partial class Form1 : Form
+    public partial class TrubshawEngineerCodingTest : Form
     {
 
         // Variables
-
         int questionNumber = 1;
 
         string name;
@@ -25,7 +24,7 @@ namespace TrubshawEngineerCodingTest
 
 
         // Window
-        public Form1()
+        public TrubshawEngineerCodingTest()
         {
             InitializeComponent();
             warningLabel.Visible = false;
@@ -55,6 +54,7 @@ namespace TrubshawEngineerCodingTest
                     question3Answer.Visible = false;
                     backButton.Visible = false;
                     break;
+
                 // Q2
                 case 2:
                     questionNo.Text = "Question 2";
@@ -71,6 +71,7 @@ namespace TrubshawEngineerCodingTest
                     question3Answer.Visible = false;
                     backButton.Visible = false;
                     break;
+
                 // Q3
                 case 3:
                     questionNo.Text = "Question 3";
@@ -87,6 +88,7 @@ namespace TrubshawEngineerCodingTest
                     question3Answer.Visible = false;
                     backButton.Visible = true;
                     break;
+
                 // Preview page
                 case 4:
                     questionNo.Text = "Preview Page";
@@ -205,6 +207,11 @@ namespace TrubshawEngineerCodingTest
 
                     warningLabel.Visible = false;
 
+                    // Clear check boxes
+                    lowCheckBox.Checked = false;
+                    mediumCheckBox.Checked = false;
+                    highCheckBox.Checked = false;
+
                     // Switch to preview page
                     questionNumber = 4;
                     askQuestion(questionNumber);
@@ -220,6 +227,7 @@ namespace TrubshawEngineerCodingTest
             }
             else
             {
+                // Exit application
                 this.Close();
             }
 
@@ -227,24 +235,40 @@ namespace TrubshawEngineerCodingTest
             nextButton.Enabled = true;
         }
 
-        // Back button on Q3 / Amend button on preview page
+        // Back button on Q3 / Amend button on preview page click function
         private void backButton_Click(object sender, EventArgs e)
         {
             switch(questionNumber)
             {
                 // Page 3
                 case 3:
+
+                    // Clear check boxes
+                    lowCheckBox.Checked = false;
+                    mediumCheckBox.Checked = false;
+                    highCheckBox.Checked = false;
+
+                    // Hide previous warning label
+                    warningLabel.Visible = false;
+
+                    // Change to Q2
                     questionNumber = 2;
                     askQuestion(questionNumber);
                     break;
+
                 // Preview page
                 case 4:
-                    questionNumber = 1;
+                    // Reset text on back and next button
                     backButton.Text = "Back";
+                    nextButton.Text = "Next";
+
+                    // Change to Q1
+                    questionNumber = 1;
                     askQuestion(questionNumber);
                     break;
             }
 
         }
+
     }
 }
