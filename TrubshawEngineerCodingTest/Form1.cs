@@ -16,9 +16,11 @@ namespace TrubshawEngineerCodingTest
     {
 
         // Variables
+
         int questionNumber = 1;
 
         string name;
+        string email;
 
 
         // Window
@@ -57,10 +59,29 @@ namespace TrubshawEngineerCodingTest
             }
         }
 
-        
+        // Check email function
+        bool checkEmail(string email)
+        {
+            // Check if valid address
+            try 
+            {
+                var address = new System.Net.Mail.MailAddress(email);
+                return address.Address == email;
+            }
+            // If not, return false
+            catch 
+            {
+                return false;
+            }
+
+        }
+
         // Button to advance to next question
         private void nextButton_Click(object sender, EventArgs e)
         {
+            // Disable button to prevent multiple submissions
+            nextButton.Enabled = false;
+
             // Q1
             if(questionNumber == 1)
             {
@@ -73,17 +94,43 @@ namespace TrubshawEngineerCodingTest
                     // Display warning
                     warningLabel.Text = "Please enter a name between 2 and 25 characters in length.";
                     warningLabel.Visible = true;
+                    nextButton.Enabled = true;
                 }
                 // If correct proceed to Q2
                 else
                 {
                     warningLabel.Visible = false;
+                    answerEntryBox.Clear();
                     questionNumber = 2;
                     askQuestion(questionNumber);
+                }
+            }
+            // Q2
+            else if (questionNumber == 2)
+            {
+                // Get email from text box
+                email = answerEntryBox.Text;
+
+                // Check name
+                if (checkEmail(email) == false)
+                {
+                    // Display warning
+                    warningLabel.Text = "Please enter a valid email address.";
+                    warningLabel.Visible = true;
+                    nextButton.Enabled = true;
+                }
+                // If correct proceed to Q3
+                else
+                {
+                    warningLabel.Visible = false;
                     answerEntryBox.Clear();
+                    questionNumber = 3;
+                    askQuestion(questionNumber);
                 }
             }
 
+            // Enable the button
+            nextButton.Enabled = true;
         }
 
         // Back button to return to question 2
