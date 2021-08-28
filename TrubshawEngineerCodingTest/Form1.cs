@@ -21,6 +21,7 @@ namespace TrubshawEngineerCodingTest
 
         string name;
         string email;
+        string threatLvl;
 
 
         // Window
@@ -42,19 +43,69 @@ namespace TrubshawEngineerCodingTest
                 case 1:
                     questionNo.Text = "Question 1";
                     questionText.Text = "What is your name?";
+                    answerEntryBox.Visible = true;
+                    lowCheckBox.Visible = false;
+                    mediumCheckBox.Visible = false;
+                    highCheckBox.Visible = false;
+                    question1.Visible = false;
+                    question1Answer.Visible = false;
+                    question2.Visible = false;
+                    question2Answer.Visible = false;
+                    question3.Visible = false;
+                    question3Answer.Visible = false;
                     backButton.Visible = false;
                     break;
                 // Q2
                 case 2:
                     questionNo.Text = "Question 2";
                     questionText.Text = "What is your email?";
+                    answerEntryBox.Visible = true;
+                    lowCheckBox.Visible = false;
+                    mediumCheckBox.Visible = false;
+                    highCheckBox.Visible = false;
+                    question1.Visible = false;
+                    question1Answer.Visible = false;
+                    question2.Visible = false;
+                    question2Answer.Visible = false;
+                    question3.Visible = false;
+                    question3Answer.Visible = false;
                     backButton.Visible = false;
                     break;
                 // Q3
                 case 3:
                     questionNo.Text = "Question 3";
                     questionText.Text = "What level of threat are you reporting?";
+                    answerEntryBox.Visible = false;
+                    lowCheckBox.Visible = true;
+                    mediumCheckBox.Visible = true;
+                    highCheckBox.Visible = true;
+                    question1.Visible = false;
+                    question1Answer.Visible = false;
+                    question2.Visible = false;
+                    question2Answer.Visible = false;
+                    question3.Visible = false;
+                    question3Answer.Visible = false;
                     backButton.Visible = true;
+                    break;
+                // Preview page
+                case 4:
+                    questionNo.Text = "Preview Page";
+                    questionText.Text = "";
+                    lowCheckBox.Visible = false;
+                    mediumCheckBox.Visible = false;
+                    highCheckBox.Visible = false;
+                    question1.Visible = true;
+                    question1Answer.Visible = true;
+                    question2.Visible = true;
+                    question2Answer.Visible = true;
+                    question3.Visible = true;
+                    question3Answer.Visible = true;
+                    question1Answer.Text = name;
+                    question2Answer.Text = email;
+                    question3Answer.Text = threatLvl;
+                    backButton.Visible = true;
+                    backButton.Text = "Amend Answers";
+                    nextButton.Text = "Exit";
                     break;
             }
         }
@@ -89,7 +140,7 @@ namespace TrubshawEngineerCodingTest
                 name = answerEntryBox.Text;
 
                 // Check name
-                if(name.Length < 2 || name.Length > 25)
+                if (name.Length < 2 || name.Length > 25)
                 {
                     // Display warning
                     warningLabel.Text = "Please enter a name between 2 and 25 characters in length.";
@@ -101,6 +152,8 @@ namespace TrubshawEngineerCodingTest
                 {
                     warningLabel.Visible = false;
                     answerEntryBox.Clear();
+
+                    // Switch to Q2
                     questionNumber = 2;
                     askQuestion(questionNumber);
                 }
@@ -124,20 +177,74 @@ namespace TrubshawEngineerCodingTest
                 {
                     warningLabel.Visible = false;
                     answerEntryBox.Clear();
+
+                    // Switch to Q3
                     questionNumber = 3;
                     askQuestion(questionNumber);
                 }
+            }
+            // Q3
+            else if (questionNumber == 3)
+            {
+                // Check only one is selected
+                if(lowCheckBox.Checked == true && mediumCheckBox.Checked == false && highCheckBox.Checked == false || lowCheckBox.Checked == false && mediumCheckBox.Checked == true && highCheckBox.Checked == false || lowCheckBox.Checked == false && mediumCheckBox.Checked == false && highCheckBox.Checked == true)
+                {
+                    // Set answer for preview page
+                    if (lowCheckBox.Checked == true)
+                    {
+                        threatLvl = "Low";
+                    }
+                    else if (mediumCheckBox.Checked == true)
+                    {
+                        threatLvl = "Medium";
+                    }
+                    else
+                    {
+                        threatLvl = "High";
+                    }
+
+                    warningLabel.Visible = false;
+
+                    // Switch to preview page
+                    questionNumber = 4;
+                    askQuestion(questionNumber);
+                }
+                // Or display warning
+                else
+                {
+                    // Display warning
+                    warningLabel.Text = "Please select one of the options.";
+                    warningLabel.Visible = true;
+
+                }
+            }
+            else
+            {
+                this.Close();
             }
 
             // Enable the button
             nextButton.Enabled = true;
         }
 
-        // Back button to return to question 2
+        // Back button on Q3 / Amend button on preview page
         private void backButton_Click(object sender, EventArgs e)
         {
-            questionNumber = 2;
-            askQuestion(questionNumber);
+            switch(questionNumber)
+            {
+                // Page 3
+                case 3:
+                    questionNumber = 2;
+                    askQuestion(questionNumber);
+                    break;
+                // Preview page
+                case 4:
+                    questionNumber = 1;
+                    backButton.Text = "Back";
+                    askQuestion(questionNumber);
+                    break;
+            }
+
         }
     }
 }
