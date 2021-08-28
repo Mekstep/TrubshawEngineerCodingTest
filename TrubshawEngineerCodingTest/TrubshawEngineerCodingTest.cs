@@ -141,8 +141,8 @@ namespace TrubshawEngineerCodingTest
                 // Get name from text box
                 name = answerEntryBox.Text;
 
-                // Check name
-                if (name.Length < 2 || name.Length > 25)
+                // Check name for length or empty spaces
+                if (name.Length < 2 || name.Length > 25 || string.IsNullOrWhiteSpace(name))
                 {
                     // Display warning
                     warningLabel.Text = "Please enter a name between 2 and 25 characters in length.";
